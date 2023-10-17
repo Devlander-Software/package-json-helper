@@ -1,0 +1,24 @@
+{
+  "name": "@devlander/package-json-type-helper",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": {
+    "name": "Landon W. Johnson",
+    "url": "https://landonjohnson.dev"
+  },
+  "dependencies": {
+   
+    "fs": "^0.0.2",
+   
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gist.github.com/landonwjohnson/d420341155c670038a6c9062f823434d"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^latest"
+  }
+}
