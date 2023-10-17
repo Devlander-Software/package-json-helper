@@ -7,9 +7,7 @@
     "url": "https://landonjohnson.dev"
   },
   "dependencies": {
-   
-    "fs": "^0.0.2",
-   
+    "fs": "^0.0.2"
   },
   "repository": {
     "type": "git",
@@ -19,6 +17,6 @@
     "test": "jest"
   },
   "devDependencies": {
-    "jest": "^latest"
+    "jest": "latest"
   }
 }
