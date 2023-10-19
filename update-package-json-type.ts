@@ -12,7 +12,7 @@ import { PackageJson, UpdatePackageJsonTypeInterface } from "./types";
  * @param {boolean} removeTypeOnBranchFlag - Whether to remove the 'type' property on a specific branch.
  * @param {string} specifiedBranch - The specified branch on which to remove the 'type' property.
  */
-const updatePackageJsonType: UpdatePackageJsonTypeInterface = (typeFlag, removeTypeFlag, removeTypeOnBranchFlag, specifiedBranch) => {
+export const updatePackageJsonType: UpdatePackageJsonTypeInterface = (typeFlag, removeTypeFlag, removeTypeOnBranchFlag, specifiedBranch) => {
   // Read package.json
   const packageJsonPath = './package.json';
   try {
@@ -46,7 +46,7 @@ const updatePackageJsonType: UpdatePackageJsonTypeInterface = (typeFlag, removeT
  * Get the current Git branch name.
  * @returns {string} The current branch name.
  */
-function getCurrentBranch() {
+export function getCurrentBranch() {
   try {
     return execSync('git rev-parse --abbrev-ref HEAD', { encoding: 'utf8' }).trim();
   } catch (err) {

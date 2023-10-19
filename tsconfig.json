@@ -6,7 +6,7 @@
     "declaration": true, // Generate declaration files
     "esModuleInterop": true,
     "types": ["node", "@types/jest"],
-    "rootDir": "",
+    "rootDir": "./",
     "noEmit": false,
     "target": "ES2015",
     "module": "commonjs",

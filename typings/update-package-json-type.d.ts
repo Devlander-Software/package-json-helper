@@ -7,5 +7,10 @@ import { UpdatePackageJsonTypeInterface } from "./types";
  * @param {boolean} removeTypeOnBranchFlag - Whether to remove the 'type' property on a specific branch.
  * @param {string} specifiedBranch - The specified branch on which to remove the 'type' property.
  */
-declare const updatePackageJsonType: UpdatePackageJsonTypeInterface;
+export declare const updatePackageJsonType: UpdatePackageJsonTypeInterface;
+/**
+ * Get the current Git branch name.
+ * @returns {string} The current branch name.
+ */
+export declare function getCurrentBranch(): string;
 export default updatePackageJsonType;

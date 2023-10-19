@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.getCurrentBranch = exports.updatePackageJsonType = void 0;
 const child_process_1 = require("child_process");
 const fs_1 = __importDefault(require("fs"));
 /**
@@ -40,6 +41,7 @@ const updatePackageJsonType = (typeFlag, removeTypeFlag, removeTypeOnBranchFlag,
         console.error('Error updating package.json:', err);
     }
 };
+exports.updatePackageJsonType = updatePackageJsonType;
 /**
  * Get the current Git branch name.
  * @returns {string} The current branch name.
@@ -53,8 +55,9 @@ function getCurrentBranch() {
         return 'unknown';
     }
 }
+exports.getCurrentBranch = getCurrentBranch;
 // Example usage:
 // Replace 'true' or 'false' with actual flag values, and provide the specifiedBranch as needed.
 // updatePackageJsonType('--type esm', true, false, 'main');
-exports.default = updatePackageJsonType;
+exports.default = exports.updatePackageJsonType;
 //# sourceMappingURL=update-package-json-type.js.map
