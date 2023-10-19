@@ -1,4 +1,8 @@
 /**
+ * TSDoc for index
+ */
+export * from "./index";
+/**
  * TSDoc for types
  */
 export * from "./types";

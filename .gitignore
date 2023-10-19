@@ -11,3 +11,7 @@ dist/*
 typings
 typings/*
 index.ts
+dist
+dist/*
+dist/**/*
+node_modules

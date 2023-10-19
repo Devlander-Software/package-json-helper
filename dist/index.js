@@ -18,6 +18,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
+ * TSDoc for index
+ */
+__exportStar(require("./index"), exports);
+/**
  * TSDoc for types
  */
 __exportStar(require("./types"), exports);
