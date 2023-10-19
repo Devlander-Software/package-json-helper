@@ -60,3 +60,7 @@ By using the package-json-type-helper, you can conveniently manage the type prop
 
 License
 This package is open-source and released under the MIT License. See the LICENSE file for details.
+
+
+## To Do
+[ ] - Create jest tests for update-package-json-type.ts
