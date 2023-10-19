@@ -1,22 +1,25 @@
-const fs = require('fs');
-const { execSync } = require('child_process');
+import { execSync } from 'child_process';
+import fs from 'fs';
+import { PackageJson, UpdatePackageJsonTypeInterface } from "./types";
+
+
 
 /**
  * Update the 'type' property in the package.json file based on provided flags and conditions.
- * @function updatePackageJsonType
+ * @name updatePackageJsonType
  * @param {string} typeFlag - The value to set for the 'type' property.
  * @param {boolean} removeTypeFlag - Whether to remove the 'type' property.
  * @param {boolean} removeTypeOnBranchFlag - Whether to remove the 'type' property on a specific branch.
  * @param {string} specifiedBranch - The specified branch on which to remove the 'type' property.
  */
-function updatePackageJsonType(typeFlag, removeTypeFlag, removeTypeOnBranchFlag, specifiedBranch) {
+const updatePackageJsonType: UpdatePackageJsonTypeInterface = (typeFlag, removeTypeFlag, removeTypeOnBranchFlag, specifiedBranch) => {
   // Read package.json
   const packageJsonPath = './package.json';
   try {
-    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+    const packageJson: PackageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
     
     // Get the current branch dynamically using Git if specifiedBranch is not provided
-    const currentBranch = specifiedBranch || getCurrentBranch();
+    const currentBranch: string = specifiedBranch || getCurrentBranch();
 
     // Check if --removeTypeFlag or --removeTypeOnBranchFlag is provided
     if (removeTypeFlag || (removeTypeOnBranchFlag && currentBranch === specifiedBranch)) {
@@ -57,6 +60,4 @@ function getCurrentBranch() {
 // updatePackageJsonType('--type esm', true, false, 'main');
 
 
-module.exports = {
-  updatePackageJsonType
-}
+export default updatePackageJsonType;
