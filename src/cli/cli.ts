@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 import yargs from 'yargs';
-import updatePackageJsonType from './update-package-json-type';
+import updatePackageJsonType from '../utils/update-package-json-type';
 
 // Your other existing functions can be added here if necessary
 
-function cli() {
+export function cli() {
   // CLI configuration using yargs
   yargs
     .scriptName("update-pkg")

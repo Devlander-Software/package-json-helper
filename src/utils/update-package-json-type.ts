@@ -1,6 +1,6 @@
 import { execSync } from 'child_process';
 import fs from 'fs';
-import { PackageJson, UpdatePackageJsonTypeInterface } from "./types";
+import { PackageJson, UpdatePackageJsonTypeInterface } from "../types/types";
 
 
 
