@@ -306,15 +306,17 @@
 
 "@devlander/collect-exports-for-bundle@gist:2ca297f86cf9e25ae2fcc01752f80908":
   version "1.0.0"
-  resolved "https://gist.github.com/2ca297f86cf9e25ae2fcc01752f80908.git#65f96aee05e43369e4cdec07043831be159b28bb"
+  resolved "https://gist.github.com/2ca297f86cf9e25ae2fcc01752f80908.git#7cd10eb6db88a05eb88e2bca208e110322066250"
   dependencies:
     "@types/jest" "^29.5.6"
+    "@types/node" "^20.8.7"
     child_process "^1.0.2"
-    fs "^0.0.1-security"
     jest "^29.7.0"
     path "^0.12.7"
     picocolors "^1.0.0"
     ts-jest "^29.1.1"
+    ts-node "^10.9.1"
+    typescript "^5.2.2"
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
@@ -670,7 +672,7 @@
     expect "^29.0.0"
     pretty-format "^29.0.0"
 
-"@types/node@*":
+"@types/node@*", "@types/node@^20.8.7":
   version "20.8.7"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.8.7.tgz#ad23827850843de973096edfc5abc9e922492a25"
   integrity sha512-21TKHHh3eUHIi2MloeptJWALuCu5H7HQTdTrWIFReA8ad+aggoX+lRes3ex7/FtpC+sVUpFMQ+QTfYr74mruiQ==
@@ -1149,11 +1151,6 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
   integrity sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==
-
-fs@^0.0.1-security:
-  version "0.0.1-security"
-  resolved "https://registry.yarnpkg.com/fs/-/fs-0.0.1-security.tgz#8a7bd37186b6dddf3813f23858b57ecaaf5e41d4"
-  integrity sha512-3XY9e1pP0CVEUCdj5BmfIZxRBTSDycnbqhIOGec9QYtmVH2fbLpj86CFWkrNOkt/Fvty4KZG5lTglL9j/gJ87w==
 
 fs@^0.0.2:
   version "0.0.2"

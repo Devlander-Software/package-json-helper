@@ -1,8 +1,9 @@
-import { AutoExporterOptions, autoExporter } from "@devlander/collect-exports-for-bundle"
+import autoExporter, { AutoExporterOptions } from "@devlander/collect-exports-for-bundle"
 
 const options: AutoExporterOptions = {
     directory: "./",
     defaultExportFile: "update-package-json-type.ts",
+    saveEntryFileWithExtension: ".ts",
     // includeExtensions: [".ts"],
     "excludeExtensions": [".test.ts", ".d.ts", "config.ts"],
     files: [
