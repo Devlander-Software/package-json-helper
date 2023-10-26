@@ -1,23 +1,22 @@
 {
   "compilerOptions": {
-    "outDir": "./dist", // Output directory
-    "declarationDir": "./typings", // Declaration files output directory
-    "allowJs": false, // Allow JavaScript files
-    "declaration": true, // Generate declaration files
+    "outDir": "./dist", 
+    "declarationDir": "./typings",
+    "allowJs": false,
+    "declaration": true,
     "esModuleInterop": true,
     "types": ["node", "@types/jest"],
     "rootDir": "src",
     "noEmit": false,
     "target": "ESNext",
+    "emitDecoratorMetadata": false,
     "module": "ESNext",
     "moduleResolution": "node",
     "sourceMap": true,
     "emitDeclarationOnly": false,
     "strict": false
-    // Other options...
     
   },
-  "include": ["./*.ts", ".config/*.ts", ".eslintrc.js", "jest.config.js", "src/__tests__/create-random-user.test.ts", "src/__tests__/create-variables-for-file.test.ts", "src/__tests__/extract-variables-from-environment.test.ts", "src/__tests__/initialize-environment.test.ts", "src/utils/create-file-config-from-path-and-root.ts", "src/utils/create-func.mock.ts", "src/utils/create-package-with-generator.ts", "src/utils/create-random-user.ts", "src/utils/create-variables-for-file.ts", "src/utils/create-variables-from-files-and-config.ts", "src/utils/example-package-with-generator.ts", "src/types/env-package-types.ts", "src/utils/get-env-for-deployment.ts", "src/utils/extract-variables-from-environment.ts", "src/cli/cli-config.ts", "src/cli/cli.ts", "src/utils/initialize-environment.ts", "src/utils/color-log.ts", "src/defaults.ts", "src/__tests__/stimulate-progress-bar.test.ts", "src/index.ts", "src/utils/stimulate-progress-bar.ts", "src/types/types.ts", "src/run-jest-coverage.ts", "src/cli/cli.ts"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts", "*.d.ts", "typings", "dist"]
-  // Other configurations...
 }

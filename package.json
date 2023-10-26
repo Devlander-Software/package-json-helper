@@ -16,7 +16,7 @@
     "update-pkg": "./dist/update-pkg.js"
   },
   "scripts": {
-    "build:index": "ts-node bootstrap.cjs",
+    "build:index": "node bootstrap.cjs",
     "test": "ts-node ./src run-jest-coverage.ts",
     "patch": "yarn version --new-version patch",
     "lint": "eslint .",

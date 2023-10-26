@@ -1,8 +1,6 @@
-import { execSync } from 'child_process';
-import fs from 'fs';
-import { PackageJson, UpdatePackageJsonTypeInterface } from "../types/types";
-
-
+import { execSync } from 'child_process'
+import fs from 'fs'
+import { PackageJson, UpdatePackageJsonTypeInterface } from '../types/types'
 
 /**
  * Update the 'type' property in the package.json file based on provided flags and conditions.
@@ -12,33 +10,43 @@ import { PackageJson, UpdatePackageJsonTypeInterface } from "../types/types";
  * @param {boolean} removeTypeOnBranchFlag - Whether to remove the 'type' property on a specific branch.
  * @param {string} specifiedBranch - The specified branch on which to remove the 'type' property.
  */
-export const updatePackageJsonType: UpdatePackageJsonTypeInterface = (typeFlag, removeTypeFlag, removeTypeOnBranchFlag, specifiedBranch) => {
+export const updatePackageJsonType: UpdatePackageJsonTypeInterface = (
+  typeFlag,
+  removeTypeFlag,
+  removeTypeOnBranchFlag,
+  specifiedBranch
+) => {
   // Read package.json
-  const packageJsonPath = './package.json';
+  const packageJsonPath = './package.json'
   try {
-    const packageJson: PackageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
-    
+    const packageJson: PackageJson = JSON.parse(
+      fs.readFileSync(packageJsonPath, 'utf8')
+    )
+
     // Get the current branch dynamically using Git if specifiedBranch is not provided
-    const currentBranch: string = specifiedBranch || getCurrentBranch();
+    const currentBranch: string = specifiedBranch || getCurrentBranch()
 
     // Check if --removeTypeFlag or --removeTypeOnBranchFlag is provided
-    if (removeTypeFlag || (removeTypeOnBranchFlag && currentBranch === specifiedBranch)) {
-      delete packageJson.type;
+    if (
+      removeTypeFlag ||
+      (removeTypeOnBranchFlag && currentBranch === specifiedBranch)
+    ) {
+      delete packageJson.type
     }
     // Check if --typeFlag is provided and set the type accordingly
     else if (typeFlag) {
-      packageJson.type = typeFlag;
+      packageJson.type = typeFlag
     }
     // Set type to 'commonjs' by default if it doesn't exist
     else if (!packageJson.type) {
-      packageJson.type = 'commonjs';
+      packageJson.type = 'commonjs'
     }
 
     // Write the updated package.json
-    fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
-    console.log('package.json updated successfully.');
+    fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2))
+    console.log('package.json updated successfully.')
   } catch (err) {
-    console.error('Error updating package.json:', err);
+    console.error('Error updating package.json:', err)
   }
 }
 
@@ -48,10 +56,12 @@ export const updatePackageJsonType: UpdatePackageJsonTypeInterface = (typeFlag, 
  */
 export function getCurrentBranch() {
   try {
-    return execSync('git rev-parse --abbrev-ref HEAD', { encoding: 'utf8' }).trim();
+    return execSync('git rev-parse --abbrev-ref HEAD', {
+      encoding: 'utf8'
+    }).trim()
   } catch (err) {
-    console.error('Error getting current branch:', err);
-    return 'unknown';
+    console.error('Error getting current branch:', err)
+    return 'unknown'
   }
 }
 
@@ -59,5 +69,4 @@ export function getCurrentBranch() {
 // Replace 'true' or 'false' with actual flag values, and provide the specifiedBranch as needed.
 // updatePackageJsonType('--type esm', true, false, 'main');
 
-
-export default updatePackageJsonType;
+export default updatePackageJsonType
