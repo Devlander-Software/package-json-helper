@@ -1,6 +1,6 @@
 {
   "name": "@devlander/package-json-type-helper",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/cjs/index.d.ts",
@@ -24,7 +24,7 @@
     "typecheck": "tsc --project tsconfig.json --noEmit --emitDeclarationOnly false",
     "buildESM": "tsc --project tsconfig.json",
     "buildCJS": "rollup -c",
-    "build": "npx rimraf ./dist &&  yarn run format && yarn run typecheck && yarn run buildESM && yarn run buildCJS && yarn run patch"
+    "build": "yarn run build:index && npx rimraf ./dist &&  yarn run format && yarn run typecheck && yarn run buildESM && yarn run buildCJS && yarn run patch"
   },
   "dependencies": {
     "@devlander/collect-exports-for-bundle": "^1.0.94",
