@@ -1,9 +1,9 @@
 {
   "name": "@devlander/package-json-type-helper",
-  "version": "1.0.21",
-  "main": "dist/cjs/index.js",
+  "version": "1.0.22",
+  "main": "dist/umd/index.js",
   "module": "dist/esm/index.js",
-  "types": "dist/cjs/index.d.ts",
+  "types": "dist/umd/index.d.ts",
   "type": "commonjs",
   "files": [
     "dist"
