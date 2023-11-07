@@ -1,6 +1,6 @@
 {
   "name": "@devlander/package-json-type-helper",
-  "version": "1.0.36",
+  "version": "1.0.37",
   "main": "dist/umd/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/umd/index.d.ts",
@@ -11,9 +11,6 @@
   "author": {
     "name": "Landon W. Johnson",
     "url": "https://landonjohnson.dev"
-  },
-  "bin": {
-    "update-pkg": "./dist/update-pkg.js"
   },
   "scripts": {
     "build:index": "node bootstrap.cjs",
