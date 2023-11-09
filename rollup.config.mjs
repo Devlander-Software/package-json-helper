@@ -9,7 +9,6 @@ import { readFileSync } from "fs";
 import dts from 'rollup-plugin-dts';
 import generateGitVersion from "rollup-plugin-generate-git-version";
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import nodePolyfills from 'rollup-plugin-polyfill-node';
 import swcPreserveDirectives from "rollup-swc-preserve-directives";
 import packageJson from './package.json' assert { type: 'json' };
 
@@ -23,10 +22,10 @@ const devDependenciesArray = Object.keys(pkg.devDependencies || {});
 const allDependencies = [...dependenciesArray, ...devDependenciesArray];
 
 const globals = {
-    envGenerator: "envGenerator",
     'fs': 'fs',
     'path': 'path',
-    'picocolors': 'pc'
+    'picocolors': 'pc',
+    "child_process": "child_process",
 };
 
 const treeshake = {
@@ -38,7 +37,9 @@ const treeshake = {
 const nodePlugins = [
     nodeResolve({
         extensions: [".ts", ".d.ts"],
+        preferBuiltins: true,
     }),
+
     json(),
     commonjs({
         ignoreTryCatch: false,
@@ -74,10 +75,7 @@ const generalPlugins = [
     swcPreserveDirectives(),
     auto(),
     peerDepsExternal(),
-    nodePolyfills({
-        fs: true, 
-        path: true
-    })
+   
 ];
 
 const config = [
@@ -87,8 +85,10 @@ const config = [
         output: [
             {
                 file: packageJson.main,
-                format: 'cjs',
+                format: 'umd',
                 sourcemap: true,
+                name: "PackageJsonTypeHelper",
+
                 globals
             },
             {
@@ -101,7 +101,8 @@ const config = [
         
         ],
         plugins: generalPlugins,
-        external: allDependencies,
+        external: id => !id.startsWith('.') && !id.startsWith('/') && !id.startsWith('\0') && !allDependencies.includes(id),
+
     },
     {
         treeshake,

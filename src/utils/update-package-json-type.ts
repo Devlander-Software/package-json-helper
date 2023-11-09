@@ -1,5 +1,5 @@
 import { execSync } from 'child_process'
-import fs from 'fs'
+import * as fs from 'fs'
 import { PackageJson, UpdatePackageJsonTypeInterface } from '../types/types'
 
 /**
@@ -10,7 +10,7 @@ import { PackageJson, UpdatePackageJsonTypeInterface } from '../types/types'
  * @param {boolean} removeTypeOnBranchFlag - Whether to remove the 'type' property on a specific branch.
  * @param {string} specifiedBranch - The specified branch on which to remove the 'type' property.
  */
-export const updatePackageJsonType: UpdatePackageJsonTypeInterface = (
+const updatePackageJsonType: UpdatePackageJsonTypeInterface = (
   typeFlag,
   removeTypeFlag,
   removeTypeOnBranchFlag,
@@ -54,7 +54,7 @@ export const updatePackageJsonType: UpdatePackageJsonTypeInterface = (
  * Get the current Git branch name.
  * @returns {string} The current branch name.
  */
-export function getCurrentBranch() {
+function getCurrentBranch() {
   try {
     return execSync('git rev-parse --abbrev-ref HEAD', {
       encoding: 'utf8'

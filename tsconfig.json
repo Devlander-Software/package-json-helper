@@ -17,6 +17,6 @@
     "strict": false
     
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts", "*.d.ts", "typings", "dist"]
+  "include": ["src/**/*", "bootstrap.cjs"],
+  "exclude": ["node_modules", "**/*.spec.ts", "*.d.ts", "typings", "dist", "build-script.config.ts"]
 }

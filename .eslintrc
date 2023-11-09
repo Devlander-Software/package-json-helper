@@ -3,8 +3,9 @@
   "parserOptions": {
     "project": "./tsconfig.eslint.json",
     "tsconfigRootDir": "./"
+
   },
- 
+ "ignorePatterns": ["node_modules/", "dist/", "coverage/", "bootstrap.cjs"],
   "extends": [
     "eslint:recommended",
     "plugin:prettier/recommended", 
