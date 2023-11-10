@@ -7,11 +7,12 @@ import terser from '@rollup/plugin-terser';
 import typescript from '@rollup/plugin-typescript';
 import { readFileSync } from "fs";
 import dts from 'rollup-plugin-dts';
-import generateGitVersion from "rollup-plugin-generate-git-version";
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import swcPreserveDirectives from "rollup-swc-preserve-directives";
+// rollup.config.js
+import builtins from 'rollup-plugin-node-builtins';
+import globals from 'rollup-plugin-node-globals';
 import packageJson from './package.json' assert { type: 'json' };
-
 const pkg = JSON.parse(readFileSync('package.json', { encoding: 'utf8' }));
 const tsConfig = JSON.parse(readFileSync('tsconfig.json', { encoding: 'utf8' }));
 const { compilerOptions } = tsConfig;
@@ -21,12 +22,12 @@ const dependenciesArray = Object.keys(pkg.dependencies || {});
 const devDependenciesArray = Object.keys(pkg.devDependencies || {});
 const allDependencies = [...dependenciesArray, ...devDependenciesArray];
 
-const globals = {
-    'fs': 'fs',
-    'path': 'path',
-    'picocolors': 'pc',
-    "child_process": "child_process",
-};
+// const globals = {
+//     'fs': 'fs',
+//     'path': 'path',
+//     'picocolors': 'pc',
+//     "child_process": "child_process",
+// };
 
 const treeshake = {
     moduleSideEffects: false,
@@ -36,9 +37,12 @@ const treeshake = {
 
 const nodePlugins = [
     nodeResolve({
-        extensions: [".ts", ".d.ts"],
-        preferBuiltins: true,
-    }),
+        preferBuiltins: true, // Prefer to use Node.js built-ins if available
+      }),
+      commonjs(),
+      globals(), // Add Node globals (process, global, etc.)
+      builtins(),
+   
 
     json(),
     commonjs({
@@ -53,7 +57,11 @@ const nodePlugins = [
 ];
 
 const generalPlugins = [
+    auto(),
+    peerDepsExternal(),
     ...nodePlugins,
+    swcPreserveDirectives(),
+
     babel({
         babelHelpers: 'runtime',
         plugins: ["@babel/plugin-transform-runtime"],
@@ -71,10 +79,7 @@ const generalPlugins = [
         },
         output: { quote_style: 1 },
     }),
-    generateGitVersion({ fileName: "gitVersion.json" }),
-    swcPreserveDirectives(),
-    auto(),
-    peerDepsExternal(),
+  
    
 ];
 
@@ -85,7 +90,7 @@ const config = [
         output: [
             {
                 file: packageJson.main,
-                format: 'umd',
+                format: 'cjs',
                 sourcemap: true,
                 name: "PackageJsonTypeHelper",
 
@@ -101,7 +106,8 @@ const config = [
         
         ],
         plugins: generalPlugins,
-        external: id => !id.startsWith('.') && !id.startsWith('/') && !id.startsWith('\0') && !allDependencies.includes(id),
+        external: ['fs', 'child_process'], // Tell Rollup 'fs' and 'child_process' are external and will be available at runtime
+    
 
     },
     {

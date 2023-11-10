@@ -1,0 +1,14 @@
+{
+  "name": "@devlander/cli-example",
+  "version": "1.0.0",
+  "description": "This is to test out the cli for the current package deployed, and in development using the yarn link command",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Landon Johnson",
+  "license": "ISC",
+  "dependencies": {
+    "@devlander/package-json-helper": "^1.0.52"
+  }
+}

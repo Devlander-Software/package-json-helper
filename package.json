@@ -4,7 +4,6 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "typings/index.d.ts",
-  "type": "commonjs",
   "files": [
     "dist",
     "typings"
@@ -17,10 +16,13 @@
     "pkg-helper": "dist/cli/cjs/index.js"
   },
   "scripts": {
+    
     "check-packages": "npx check-package-dependencies",
     "build:index": "node bootstrap.cjs",
     "patch": "yarn version --new-version patch",
-    "test": "jest",
+    "test": "yarn run link-packages && yarn run get-permissions-for-test",
+    "link-packages": "node ./yarn-link-handler.js",
+    "test-cli": " && cd ./example && yarn run test",
     "format": "eslint './src/**/*.ts' --fix && prettier --write './src/**/*.ts'",
     "typecheck": "tsc --project tsconfig.json --noEmit --emitDeclarationOnly false",
     "buildESM": "tsc --project tsconfig.json",
@@ -28,7 +30,9 @@
     "buildCJS": "rollup -c ./rollup.config.mjs && rollup -c ./rollup-cli.config.mjs",
     "build": "yarn run build:index && npx rimraf ./dist && npx rimraf ./typings &&  yarn run format && yarn run typecheck && yarn run buildESM && yarn run buildCJS",
     "prepare": "yarn run build",
-    "start-publish": "yarn run lint && yarn run build && yarn run test && yarn run patch && npm publish"
+    "get-permissions-for-test": "node ./get-cli-permissions.js",
+    "allow-read-access": "chmod +x dist/cli/cjs/index.js",
+    "start-publish": "yarn run lint && yarn run build && yarn run allow-read-access && yarn run test && yarn run patch && npm publish"
   },
   "dependencies": {
     "@devlander/collect-exports-for-bundle": "^1.1.68",

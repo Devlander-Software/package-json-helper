@@ -1,20 +1,13 @@
-export interface UpdatePackageJsonTypeInterface {
-  (
-    typeFlag: string,
-    removeTypeFlag: boolean,
-    removeTypeOnBranchFlag: boolean,
-    specifiedBranch: string
-  ): void
-}
-
-export interface Dependencies {
-  [name: string]: string
-}
+import { Dependencies } from './dependencies.interface'
+import { Person } from './person.interface'
+import { Repository } from './repository.interface'
+import { PackageJsonModuleType } from './update-package-json-type.interface'
 
 export interface PackageJson {
   name: string
   version: string
   private?: boolean
+  type?: PackageJsonModuleType
   description?: string
   keywords?: string[]
   homepage?: string
@@ -68,16 +61,4 @@ export interface PackageJson {
   prettier?: any
   babel?: any
   [key: string]: any // For any additional fields.
-}
-
-export interface Person {
-  name: string
-  email?: string
-  url?: string
-}
-
-export interface Repository {
-  type: string
-  url: string
-  directory?: string
 }

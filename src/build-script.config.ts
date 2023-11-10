@@ -1,14 +1,12 @@
-const autoExporter = require('@devlander/collect-exports-for-bundle').default
-
-const main = () => {
-  autoExporter({
+const startExport = () => {
+  require('@devlander/collect-exports-for-bundle').default({
     rootDir: 'src',
     primaryExportFile: 'update-package-json-type.ts',
     allowedExtensions: ['.ts'],
-    exportMode: 'default',
+    exportMode: 'both',
     ignoredExtensions: ['.spec.ts', '.config.ts'],
     outputFilenameExtension: '.ts'
   })
 }
 
-main()
+startExport()

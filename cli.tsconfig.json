@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "outDir": "dist", 
+    "outDir": "cli", 
     "declarationDir": "typings",
     "allowJs": false,
     "declaration": true,
     "esModuleInterop": true,
     "types": ["node", "@types/jest"],
     "rootDir": "src",
-    "rootDirs": [],
+    "rootDirs": ["pkg-helper", "src"],
     "noEmit": false,
     "target": "ESNext",
     "emitDecoratorMetadata": false,
@@ -18,6 +18,6 @@
     "strict": false
     
   },
-  "include": ["src/**/*", "bootstrap.cjs", "src/pkg-helper"],
+  "include": ["src/**/*", "bootstrap.cjs", "pkg-helper"],
   "exclude": ["node_modules", "**/*.spec.ts", "*.d.ts", "typings", "dist", "src/build-script.config.ts"]
 }
