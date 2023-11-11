@@ -1,3 +1,34 @@
+
+![Devlander Package Json Helper Header](https://github.com/Devlander-Software/media/images/package-json-type-helper-preview.jpg)
+
+
+
+<a href="https://twitter.com/intent/tweet?button_hashtag=Devlander" target="\_parent">
+  <img alt="#Devlander" src="https://img.shields.io/twitter/url?color=%2308a0e9&label=%23Devlander&style=social&url=https%3A%2F%2Ftwitter.com%2Fintent%2Ftweet%3Fbutton_hashtag%3DDevlander">
+</a><a href="https://bit.ly/devlander-discord-invite" target="\_parent">
+  <img alt="" src="https://img.shields.io/badge/Discord-Devlander-%235865F2" />
+</a>
+
+<a href="https://www.npmjs.com/package/@devlander/package-json-helper" target="\_parent">
+
+  <img alt="" src="https://img.shields.io/npm/dm/@devlander/package-json-helper.svg" />
+</a>
+
+<a href="https://github.com/orgs/Devlander-Software/discussions">
+  <img alt="Join the discussion on Github" src="https://img.shields.io/badge/Github%20Discussions%20%26%20Support-Chat%20now!-blue" />
+</a>
+
+<a href="https://bit.ly/3zg6mBG">
+  <img alt="Join Devlander on Twitch" src="https://img.shields.io/twitch/status/twitch" />
+</a>
+
+
+
+<a href="https://bit.ly/landonwjohnson-on-twitter" target="\_parent">
+  <img alt="Landon Johnson On Twitter" src="https://img.shields.io/twitter/follow/landonwjohnson.svg?style=social&label=Follow" />
+</a> 
+
+
 # Package.json Type Helper
 
 ## Introduction
@@ -19,48 +50,87 @@ You can install the **`package-json-type-helper`** package globally using npm:
 
 npm
 ```bash
-npm install gist:d420341155c670038a6c9062f823434d
+npm install @devlander/package-json-helper
 ```
 
 or
 
 yarn
 ```bash
-yarn add gist:d420341155c670038a6c9062f823434d
+yarn add @devlander/package-json-helper
 ```
 
 ## Usage
-Once installed, you can use the **package-json-type-helper** command in your terminal. Here are some examples of how to use it:
+Once installed, you can use the **package-json-type-helper** function to help you streamline your process. 
 
-## Remove the type property from package.json:
+```javascript
+const updatePackageJsonType = require("@devlander/package-json-type-helper")
+// Capture command-line arguments
 
-```bash
-  @devlander/package-json-type-helper --removeType
+const updatePackage = () => {
+  const args = process.argv.slice(2)
+
+  // Define default flag values
+  let typeFlag: string = "commonjs"
+  let removeTypeFlag: boolean = false
+  let removeTypeOnBranchFlag: boolean = false
+  let specifiedBranch: string = "storybook"
+
+  // Parse the command-line arguments
+  for (let i = 0; i < args.length; i++) {
+    switch (args[i]) {
+      case "--type":
+        typeFlag = args[++i]
+        break
+      case "--removeType":
+        removeTypeFlag = true
+        break
+      case "--removeTypeOnBranch":
+        removeTypeOnBranchFlag = true
+        break
+      case "--branch":
+        specifiedBranch = args[++i]
+        break
+    }
+  }
+  updatePackageJsonType(
+    typeFlag,
+    removeTypeFlag,
+    removeTypeOnBranchFlag,
+    specifiedBranch,
+  )
+}
+
+updatePackage()
+
 ```
 
-## Remove the type property from package.json only when on a specified branch (e.g., 'main'):
-```bash
-  package-json-type-helper --removeTypeOnBranch --branch main
+I have been using it like this until i finish my cli
+
+
+Inside your package.json scripts
+```json
+  "scripts": {
+    "updatePackageType": "node ./package-type-helper.cjs",
+    "setPackageTypeToCommonJs": "yarn run update-package-type -- --type commonjs",
+    "removeTypeFromPackage": "yarn run update-package-type -- --removeType",
+    "storybook": "yarn run removeTypeFromPackage && storybook build && storybook dev"
+  }
+
 ```
 
-Set a custom type value in package.json (e.g., 'esm'):
-```bash
-  @devlander/package-json-type-helper --type module
-```
 
-Default to a type of 'commonjs' in package.json if it doesn't exist:
-```bash
-  @devlander/package-json-type-helper
-```
+
 
 ## Notes
 Ensure that you are running this utility from the root directory of your project where the package.json file is located.
-Always commit your changes to package.json after using this utility to maintain consistency in your version control system.
-By using the package-json-type-helper, you can conveniently manage the type property in your package.json without causing issues when developing and deploying your design system in Storybook and npm.
+By using the package-json-helper, you can conveniently manage the type property in your package.json without causing issues when developing and deploying your design system in Storybook and npm.
 
 License
 This package is open-source and released under the MIT License. See the LICENSE file for details.
 
 
 ## To Do
-[ ] - Create jest tests for update-package-json-type.ts
+[x] - Create jest tests for update-package-json-type.ts
+[ ] - Finalize cli tests
+[ ] - Swap main entry files 
