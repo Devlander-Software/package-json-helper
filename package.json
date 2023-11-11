@@ -1,6 +1,6 @@
 {
   "name": "@devlander/package-json-helper",
-  "version": "1.0.52",
+  "version": "1.0.53",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "typings/index.d.ts",
@@ -16,7 +16,6 @@
     "pkg-helper": "dist/cli/cjs/index.js"
   },
   "scripts": {
-    
     "check-packages": "npx check-package-dependencies",
     "build:index": "node bootstrap.cjs",
     "patch": "yarn version --new-version patch",
@@ -109,6 +108,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gist.github.com/landonwjohnson/d420341155c670038a6c9062f823434d"
+    "url": "https://github.com/Devlander-Software/package-json-type-helper"
   }
 }
