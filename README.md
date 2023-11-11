@@ -1,5 +1,5 @@
 
-![Devlander Package Json Helper Header](https://github.com/Devlander-Software/media/images/package-json-type-helper-preview.jpg)
+![Devlander Package Json Helper Header](https://github.com/Devlander-Software/package-json-type-helper/raw/main/media/images/package-json-type-helper-preview.jpg)
 
 
 
