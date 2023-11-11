@@ -131,6 +131,6 @@ This package is open-source and released under the MIT License. See the LICENSE 
 
 
 ## To Do
-[x] - Create jest tests for update-package-json-type.ts
-[ ] - Finalize cli tests
-[ ] - Swap main entry files 
+- [x] Create jest tests for update-package-json-type.ts
+- [ ] Finalize cli tests
+- [ ] Swap main entry files 
