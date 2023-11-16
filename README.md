@@ -28,6 +28,10 @@
   <img alt="Landon Johnson On Twitter" src="https://img.shields.io/twitter/follow/landonwjohnson.svg?style=social&label=Follow" />
 </a> 
 
+<a href="https://bit.ly/landon-wakatime-link" >
+<img src="https://wakatime.com/badge/user/bd50b6c5-e0ca-4937-83b3-ab2d13adbc73/project/018b4458-1d71-4cca-84f7-1a6db871b168.svg" />
+<a/>
+
 
 # Package.json Type Helper
 
