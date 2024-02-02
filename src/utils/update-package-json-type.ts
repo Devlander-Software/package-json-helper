@@ -1,9 +1,12 @@
 import * as fs from 'fs'
-import { PackageJson } from '../types/package-json.interface'
-import { UpdatePackageJsonTypeInterface } from '../types/update-package-json-type.interface'
+import type { PackageJson } from '../types/package-json.interface'
+import type { UpdatePackageJsonTypeInterface } from '../types/update-package-json-type.interface'
 import { getCurrentBranch } from './get-current-git-branch'
-import { isDeepEqual } from './is-deep-equal'
 import { logColoredMessage, logMessageBasedOnCondition } from './log-with-color'
+import { isDeepEqual, isJson } from '@devlander/utils'
+import { swapTypeEntry } from './swap-type-entry'
+import { removeTypeOnValidBranch } from './remove-type-on-branch'
+import pico from 'picocolors'
 
 /**
  * Update the 'type' property in the package.json file based on provided flags and conditions.
@@ -16,60 +19,65 @@ const updatePackageJsonType: UpdatePackageJsonTypeInterface = (
   typeFlag: string = 'commonjs',
   removeTypeFlag?: boolean,
   removeTypeOnBranchFlag?: boolean,
-  specifiedBranch?: string
+  specifiedBranch?: string,
+  pathForPackageJson?: string
 ) => {
-  const packageJsonPath = './package.json'
+  let packageJsonPath = ''
+  const typeToCheck = typeFlag
+  if (!pathForPackageJson) {
+    pathForPackageJson = `${process.cwd()}/package.json`
+  } else {
+    packageJsonPath = pathForPackageJson
+  }
+
+  const getPackage = (pathForPackageJson: string): PackageJson => {
+    if (!fs.existsSync(pathForPackageJson)) {
+      throw new Error('package.json not found')
+    }
+    const jsonToRead = fs.readFileSync(pathForPackageJson, 'utf8')
+    const parsedJson = isJson(jsonToRead)
+    if (!parsedJson) {
+      throw new Error('failed to parse json')
+    } else {
+      return parsedJson as unknown as PackageJson
+    }
+  }
+
   try {
-    const packageJson: Partial<PackageJson> = JSON.parse(
-      fs.readFileSync(packageJsonPath, 'utf8')
+    const packageJson = getPackage(pathForPackageJson)
+    if (!packageJson) {
+      throw new Error('package.json not found')
+    }
+    let newPackageJson: PackageJson = { ...packageJson }
+
+    const onSpecifiedBranch = removeTypeOnValidBranch(
+      newPackageJson,
+      specifiedBranch
     )
-    const newPackageJson = { ...packageJson }
-
-    const currentBranch: string = specifiedBranch || getCurrentBranch()
-
-    if (removeTypeFlag && !specifiedBranch && newPackageJson.type) {
-      delete newPackageJson.type
-      logColoredMessage(`Attempting to remove type from package.json`, 'blue')
-    } else if (
-      ((typeFlag && newPackageJson.type !== typeFlag) ||
-        !newPackageJson.type) &&
-      !specifiedBranch
-    ) {
-      if (!newPackageJson.type) {
-        logColoredMessage(
-          `Trying to set package.json type to  ${typeFlag}`,
-          'blue'
-        )
-      } else {
-        logColoredMessage(
-          `Attempting to replace type ${newPackageJson.type} with ${typeFlag} in package.json`,
-          'blue'
-        )
-      }
-
-      newPackageJson.type = typeFlag
-    } else if (specifiedBranch && removeTypeOnBranchFlag) {
-      logColoredMessage(
-        `Attempting to remove type from package.json since specifiedBranch and removeTypeOnBranchFlag have been set`,
-        'blue'
-      )
-      if (currentBranch && currentBranch === specifiedBranch) {
-        logColoredMessage(
-          'Removing type from package.json since specified branch matches current branch',
-          'blue'
-        )
-        delete newPackageJson.type
-      } else {
-        logColoredMessage(
-          `Not removing type from package.json since  ${currentBranch} does not match ${specifiedBranch}`,
-          'blue'
-        )
+    if (!onSpecifiedBranch) {
+      const result = swapTypeEntry(typeToCheck, packageJsonPath)
+      if (typeof result !== 'string' && typeof result === 'object') {
+        newPackageJson = result
       }
     }
 
     if (!isDeepEqual(packageJson, newPackageJson)) {
-      fs.writeFileSync(packageJsonPath, JSON.stringify(newPackageJson, null, 2))
       logMessageBasedOnCondition('package.json updated successfully.', true)
+
+      pico.bgWhite(`${pico.blue('Changes made to')}
+        ${pico.bgBlue(pico.white('package.json:'))}
+        ${pico.magenta('before:')}
+        ${pico.green(JSON.stringify(packageJson, null, 2))}
+        ${pico.magenta('after:')}
+        ${pico.green(JSON.stringify(newPackageJson, null, 2))}
+        ${pico.black('When passing arguments:')}
+        ${pico.bgBlack(pico.white(`typeFlag: ${typeFlag}`))}
+        ${pico.bgBlack(pico.white(`removeTypeFlag: ${removeTypeFlag}`))}
+        ${pico.bgBlack(
+          pico.white(`removeTypeOnBranchFlag: ${removeTypeOnBranchFlag}`)
+        )}
+        ${pico.bgBlack(pico.white(`specifiedBranch: ${specifiedBranch}`))}
+      `)
     } else {
       logColoredMessage(
         `No need to update package.json as 'type' is already set to ${typeFlag}.`,

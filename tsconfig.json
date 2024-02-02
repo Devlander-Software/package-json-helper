@@ -7,7 +7,6 @@
     "esModuleInterop": true,
     "types": ["node", "@types/jest"],
     "rootDir": "src",
-    "rootDirs": [],
     "noEmit": false,
     "target": "ESNext",
     "emitDecoratorMetadata": false,
@@ -18,6 +17,6 @@
     "strict": false
     
   },
-  "include": ["src/**/*", "bootstrap.cjs", "src/pkg-helper"],
-  "exclude": ["node_modules", "**/*.spec.ts", "*.d.ts", "typings", "dist", "src/build-script.config.ts"]
+  "include": ["src/**/*", "bootstrap.cjs", "src/pkg-helper", "build-script.config.js", "rollup.config.js", "test/**/*", "__tests__/**/*.ts", "__tests__/**/*.test.ts", "__tests__"],
+  "exclude": ["node_modules", "**/*.spec.ts", "*.d.ts", "typings", "dist", "src/build-script.config.ts", "jest.config.ts"]
 }

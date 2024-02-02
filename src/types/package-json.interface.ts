@@ -1,7 +1,7 @@
-import { Dependencies } from './dependencies.interface'
-import { Person } from './person.interface'
-import { Repository } from './repository.interface'
-import { PackageJsonModuleType } from './update-package-json-type.interface'
+import type { Dependencies } from './dependencies.interface'
+import type { Person } from './person.interface'
+import type { Repository } from './repository.interface'
+import type { PackageJsonModuleType } from './update-package-json-type.interface'
 
 export interface PackageJson {
   name: string
@@ -50,15 +50,54 @@ export interface PackageJson {
   resolutions?: { [name: string]: string }
 
   // Fields for various tools
-  jest?: any
-  eslintConfig?: any
-  tsconfig?: any
-  browserslist?: any
-  husky?: any
-  commitlint?: any
-  lintStaged?: any
-  stylelint?: any
-  prettier?: any
-  babel?: any
-  [key: string]: any // For any additional fields.
+  jest?: JestConfig
+  eslintConfig?: EslintConfig
+  tsconfig?: TsconfigConfig
+  browserslist?: BrowserslistConfig
+  husky?: HuskyConfig
+  commitlint?: CommitlintConfig
+  lintStaged?: LintStagedConfig
+  stylelint?: StylelintConfig
+  prettier?: PrettierConfig
+  babel?: BabelConfig
+}
+
+interface JestConfig {
+  [key: string]: any
+}
+
+interface EslintConfig {
+  [key: string]: any
+}
+
+interface TsconfigConfig {
+  [key: string]: any
+}
+
+interface BrowserslistConfig {
+  [key: string]: any
+}
+
+interface HuskyConfig {
+  [key: string]: any
+}
+
+interface CommitlintConfig {
+  [key: string]: any
+}
+
+interface LintStagedConfig {
+  [key: string]: any
+}
+
+interface StylelintConfig {
+  [key: string]: any
+}
+
+interface PrettierConfig {
+  [key: string]: any
+}
+
+interface BabelConfig {
+  [key: string]: any
 }
