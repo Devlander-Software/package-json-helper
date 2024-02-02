@@ -1,6 +1,6 @@
 {
   "name": "@devlander/package-json-helper",
-  "version": "1.0.54",
+  "version": "1.0.55",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "typings/index.d.ts",
@@ -31,7 +31,7 @@
     "prepare": "yarn run build",
     "get-permissions-for-test": "node ./get-cli-permissions.js",
     "allow-read-access": "chmod +x dist/cli/cjs/index.js",
-    "start-publish": "yarn run lint && yarn run build && yarn run allow-read-access && yarn run test && yarn run patch && npm publish"
+    "start-publish": "yarn run lint && yarn run build && yarn run allow-read-access && yarn run test && yarn  patch && npm publish"
   },
   "dependencies": {
     "@devlander/collect-exports-for-bundle": "^1.1.68",
