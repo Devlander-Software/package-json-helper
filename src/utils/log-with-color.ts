@@ -1,6 +1,8 @@
 import type { TColorValue } from '../types/log-color.types'
 import { TColor } from '../types/log-color.types'
 
+import { logFormattedPhrases } from '@devlander/utils'
+
 const { blue, green, red, yellow } = require('picocolors')
 
 const logWithColor = (color: TColor | TColorValue, message: string) => {

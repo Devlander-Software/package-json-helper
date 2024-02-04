@@ -34,39 +34,41 @@ export const swapTypeEntry = (
     }
 
     const packageJson = fs.readFileSync(packageJsonPath, 'utf8')
-    let parsedPackage = isJson(packageJson) as unknown as PackageJson
+    let parsedPackage: PackageJson | boolean = isJson(packageJson) as
+      | PackageJson
+      | boolean
+
+    if (typeof parsedPackage === 'boolean') {
+      throw new Error('Invalid package.json format')
+    }
 
     if (
-      typeof parsedPackage !== 'boolean' &&
-      typeof parsedPackage === 'object'
+      typeToSwap === 'none' ||
+      (typeof typeToSwap === 'undefined' && parsedPackage.type)
     ) {
-      if (
-        (typeToSwap === 'none' && parsedPackage.type) ||
-        (typeof typeToSwap === 'undefined' && parsedPackage.type)
-      ) {
-        delete parsedPackage.type
-      } else if (parsedPackage.type !== typeToSwap) {
-        parsedPackage.type = typeToSwap
-      } else if (parsedPackage.type === typeToSwap) {
-        console.log('Type is already set to the specified value')
-        return parsedPackage
-      } else if (!parsedPackage.type) {
-        parsedPackage = {
-          ...parsedPackage,
-          type: typeToSwap
-        }
+      delete parsedPackage.type
+    } else if (parsedPackage.type !== typeToSwap) {
+      parsedPackage.type = typeToSwap
+    } else if (parsedPackage.type === typeToSwap) {
+      console.log('Type is already set to the specified value')
+      return parsedPackage as PackageJson
+    } else if (!parsedPackage.type) {
+      parsedPackage = {
+        ...parsedPackage,
+        type: typeToSwap
       }
-
-      fs.writeFileSync(packageJsonPath, JSON.stringify(parsedPackage, null, 2))
-
-      logColoredMessage(
-        `Updated type entry in package.json to ${typeToSwap}`,
-        'blue'
-      )
     }
+
+    fs.writeFileSync(packageJsonPath, JSON.stringify(parsedPackage, null, 2))
+
+    logColoredMessage(
+      `Updated type entry in package.json to ${typeToSwap}`,
+      'blue'
+    )
+
     return parsedPackage
-  } catch (error: any) {
-    logColoredMessage('Failed to swap type entry', 'red')
+  } catch (error) {
+    logColoredMessage(`Failed to swap type entry: ${error.message as Error}`, 'red')
     return 'Failed to swap type entry'
   }
 }

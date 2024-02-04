@@ -37,7 +37,7 @@
 
   "dependencies": {
     "@devlander/collect-exports-for-bundle": "^1.1.68",
-    "@devlander/utils": "^0.0.9",
+    "@devlander/utils": "^0.0.13",
     "@types/jest": "^29.5.6",
     "ansi-regex": "^6.0.1",
     "ansi-styles": "^6.2.1",

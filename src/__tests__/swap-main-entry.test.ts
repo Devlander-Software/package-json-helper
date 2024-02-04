@@ -39,7 +39,7 @@ describe('swapMainEntry', () => {
 
   it('should be able to swap the main entry in package.json', () => {
     return new Promise<void>((done) => {
-      swapMainEntry(pathForExamplePackageJson, 'new-value')
+      swapMainEntry('new-value', pathForExamplePackageJson)
       setTimeout(() => {
         const updatedPackageJson = refetchJson(pathForExamplePackageJson)
         expect(updatedPackageJson.main).toBe('new-value')
@@ -51,7 +51,7 @@ describe('swapMainEntry', () => {
 
   it('should be able to swap the main entry back to the original value', () => {
     return new Promise<void>((done) => {
-      swapMainEntry(pathForExamplePackageJson, originalValue)
+      swapMainEntry(originalValue, pathForExamplePackageJson)
 
       setTimeout(() => {
         const updatedValue = refetchJson(pathForExamplePackageJson).main

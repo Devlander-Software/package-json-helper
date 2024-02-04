@@ -8,8 +8,8 @@ import { logColoredMessage } from './log-with-color'
  * @param {string} newMainValue The new value for the main field.
  */
 export const swapMainEntry = (
-  packageJsonPath: string,
-  newMainValue: string
+  newMainValue: string,
+  packageJsonPath: string
 ) => {
   try {
     // Load package.json
@@ -25,7 +25,12 @@ export const swapMainEntry = (
       `Updated main entry in package.json to ${newMainValue}`,
       'blue'
     )
-  } catch (error: any) {
-    logColoredMessage('Failed to swap main entry', 'red')
+  } catch (error) {
+    logColoredMessage(
+      `Failed to swap type entry: ${error.message as Error}`,
+      'red'
+    )
+
+    return 'Failed to swap main entry'
   }
 }

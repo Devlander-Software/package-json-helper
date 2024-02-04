@@ -1,7 +1,6 @@
 import * as fs from 'fs'
 import type { PackageJson } from '../types/package-json.interface'
 import type { UpdatePackageJsonTypeInterface } from '../types/update-package-json-type.interface'
-import { getCurrentBranch } from './get-current-git-branch'
 import { logColoredMessage, logMessageBasedOnCondition } from './log-with-color'
 import { isDeepEqual, isJson } from '@devlander/utils'
 import { swapTypeEntry } from './swap-type-entry'
