@@ -1,6 +1,5 @@
 import fs from 'fs'
 import { logColoredMessage } from './log-with-color'
-import { fancyLog } from './fancy-log'
 
 /**
  * Swaps the main entry in package.json.
