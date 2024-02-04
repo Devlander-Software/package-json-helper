@@ -2,7 +2,7 @@
   "name": "@devlander/cli-example",
   "version": "1.0.0",
   "description": "This is to test out the cli for the current package deployed, and in development using the yarn link command",
-  "main": "index.js",
+  "main": "new-value-two",
   "scripts": {
     "test": "jest"
   },

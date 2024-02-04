@@ -45,14 +45,9 @@ describe('swapTypeEntry', () => {
   }, 1500)
 
   it('should remove type entry when typeToSwap is "none"', () => {
-    return new Promise<void>((done) => {
-      swapTypeEntry('none', pathForExamplePackageJson)
+    swapTypeEntry('none', pathForExamplePackageJson)
 
-      setTimeout(() => {
-        const updatedPackageJson = refetchJson(pathForExamplePackageJson)
-        expect(updatedPackageJson.type).toBeUndefined()
-        done()
-      }, 1000)
-    })
+    const updatedPackageJson = refetchJson(pathForExamplePackageJson)
+    expect(updatedPackageJson.type).toBeUndefined()
   })
 })

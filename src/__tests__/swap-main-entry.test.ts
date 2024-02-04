@@ -1,6 +1,8 @@
 import { isJson } from '@devlander/utils'
 import type { PackageJson } from '../types/package-json.interface'
 
+const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+
 describe('swapMainEntry', () => {
   const fs = require('fs')
   const currentCommand = process.cwd()
@@ -32,33 +34,41 @@ describe('swapMainEntry', () => {
     }
   }
 
+  // write reset to package.json
+  const updateValueAndReturnJson = (value: string) => {
+    const oldValue = refetchJson(pathForExamplePackageJson).main
+    swapMainEntry(value, pathForExamplePackageJson)
+    const updatedPackageJson = refetchJson(pathForExamplePackageJson)
+    return { updatedPackageJson, oldValue }
+  }
+
+  // reset the package.json to the original value
+
   // now get the example package.json using the current command path
 
   const pathForExamplePackageJson = `${currentCommand}/example/package.json`
-  const originalValue = refetchJson(pathForExamplePackageJson).main
+
+  beforeAll(() => {
+    swapMainEntry('index.js', pathForExamplePackageJson)
+  })
 
   it('should be able to swap the main entry in package.json', () => {
-    return new Promise<void>((done) => {
-      swapMainEntry('new-value', pathForExamplePackageJson)
-      setTimeout(() => {
-        const updatedPackageJson = refetchJson(pathForExamplePackageJson)
-        expect(updatedPackageJson.main).toBe('new-value')
-        expect(updatedPackageJson.main).not.toBe(originalValue)
-        done()
-      }, 1000)
-    })
-  }, 1500)
+    const testValue = updateValueAndReturnJson('new-value')
+    expect(testValue.updatedPackageJson.main).toBe('new-value')
+    expect(testValue.updatedPackageJson.main).not.toBe(testValue.oldValue)
+    expect(testValue.updatedPackageJson.main).not.toBe('new-value-two')
+  }, 500)
 
   it('should be able to swap the main entry back to the original value', () => {
-    return new Promise<void>((done) => {
-      swapMainEntry(originalValue, pathForExamplePackageJson)
+    const testValue = updateValueAndReturnJson('new-value-two')
+    wait(100)
+    expect(testValue.updatedPackageJson.main).toBe('new-value-two')
+    wait(100)
 
-      setTimeout(() => {
-        const updatedValue = refetchJson(pathForExamplePackageJson).main
-        expect(updatedValue).toBe(originalValue)
-        expect(updatedValue).not.toBe('new-value')
-        done()
-      }, 1000)
-    })
-  }, 1500)
+    expect(testValue.updatedPackageJson.main).not.toBe(testValue.oldValue)
+    wait(100)
+
+    expect(testValue.updatedPackageJson.main).not.toBe('new-value')
+    expect(testValue.updatedPackageJson.main).not.toBe('index.js')
+  }, 500)
 })
