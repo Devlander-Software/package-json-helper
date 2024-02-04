@@ -68,7 +68,3 @@ Incorporate into your `package.json` scripts for streamlined usage:
 - [x] Jest tests for utility functions.
 - [x] Main entry file swapping.
 - [ ] CLI tests finalization.
-
----
-
-This version enhances SEO by strategically placing relevant keywords and provides a more straightforward, engaging introduction to the utility. It lays out the benefits and features in an easy-to-understand manner, encouraging readers to dive deeper into the content.
