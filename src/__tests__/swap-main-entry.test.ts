@@ -1,6 +1,5 @@
 import { isJson } from '@devlander/utils'
 import type { PackageJson } from '../types/package-json.interface'
-import exp from 'constants'
 
 describe('swapMainEntry', () => {
   const fs = require('fs')
@@ -38,24 +37,28 @@ describe('swapMainEntry', () => {
   const pathForExamplePackageJson = `${currentCommand}/example/package.json`
   const originalValue = refetchJson(pathForExamplePackageJson).main
 
-  it('should be able to swap the main entry in package.json', (done) => {
-    swapMainEntry(pathForExamplePackageJson, 'new-value')
-    setTimeout(() => {
-      const updatedPackageJson = refetchJson(pathForExamplePackageJson)
-      expect(updatedPackageJson.main).toBe('new-value')
-      expect(updatedPackageJson.main).not.toBe(originalValue)
-      done()
-    }, 1000)
+  it('should be able to swap the main entry in package.json', () => {
+    return new Promise<void>((done) => {
+      swapMainEntry(pathForExamplePackageJson, 'new-value')
+      setTimeout(() => {
+        const updatedPackageJson = refetchJson(pathForExamplePackageJson)
+        expect(updatedPackageJson.main).toBe('new-value')
+        expect(updatedPackageJson.main).not.toBe(originalValue)
+        done()
+      }, 1000)
+    })
   }, 1500)
 
-  it('should be able to swap the main entry back to the original value', (done) => {
-    swapMainEntry(pathForExamplePackageJson, originalValue)
+  it('should be able to swap the main entry back to the original value', () => {
+    return new Promise<void>((done) => {
+      swapMainEntry(pathForExamplePackageJson, originalValue)
 
-    setTimeout(() => {
-      const updatedValue = refetchJson(pathForExamplePackageJson).main
-      expect(updatedValue).toBe(originalValue)
-      expect(updatedValue).not.toBe('new-value')
-      done()
-    }, 1000)
+      setTimeout(() => {
+        const updatedValue = refetchJson(pathForExamplePackageJson).main
+        expect(updatedValue).toBe(originalValue)
+        expect(updatedValue).not.toBe('new-value')
+        done()
+      }, 1000)
+    })
   }, 1500)
 })
