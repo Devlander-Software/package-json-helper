@@ -1,5 +1,6 @@
 import fs from 'fs'
 import { logColoredMessage } from './log-with-color'
+import { fancyLog } from './fancy-log'
 
 /**
  * Swaps the main entry in package.json.
@@ -9,8 +10,7 @@ import { logColoredMessage } from './log-with-color'
  */
 export const swapMainEntry = (
   newMainValue: string,
-  packageJsonPath: string,
-
+  packageJsonPath: string
 ) => {
   try {
     // Load package.json
@@ -26,7 +26,12 @@ export const swapMainEntry = (
       `Updated main entry in package.json to ${newMainValue}`,
       'blue'
     )
-  } catch (error: any) {
-    logColoredMessage('Failed to swap main entry', 'red')
+  } catch (error) {
+    logColoredMessage(
+      `Failed to swap type entry: ${error.message as Error}`,
+      'red'
+    )
+
+    return 'Failed to swap main entry'
   }
 }

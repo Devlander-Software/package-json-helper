@@ -1116,10 +1116,10 @@
     typescript "^5.2.2"
     yargs "^17.7.2"
 
-"@devlander/utils@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@devlander/utils/-/utils-0.0.9.tgz#ee8b1b6a38c111892922a57ffcf078a8018e2271"
-  integrity sha512-Wix0cMnjWB/SpVCG2UMvbPTLKaXBDArLE+O5DD+uQOewcItjvgu6gH0SIgFnatuJe0ZURwT2Zqg6v/KEtMQFxw==
+"@devlander/utils@^0.0.13":
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/@devlander/utils/-/utils-0.0.13.tgz#4727a453e79ccd1964f6fd0abd8269238105e664"
+  integrity sha512-zaCBjTZ73unSQ2i62g3e8Ydr0d25ZqnGCBKlIyOoYhU4UdQ6OtCFuU/zTSb8Do1SgOknTaVdXvNpbwC5EIY1cA==
   dependencies:
     jsdom-global "^3.0.2"
 
