@@ -1,4 +1,4 @@
-import { Config } from '@jest/types'
+import type { Config } from '@jest/types'
 import * as jest from 'jest'
 import * as fs from 'node:fs'
 import path from 'node:path'

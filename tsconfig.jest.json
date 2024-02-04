@@ -1,0 +1,24 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // ...other options...
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+   
+    // ...rest of your config...
+  },
+  "include": [
+   "__tests__/**/*.ts",
+    "__tests__/**/*.test.ts",
+    "jest.config.ts",
+
+
+
+  ],
+  "exclude": [
+    "node_modules",
+    // You can also explicitly exclude the conflicting type files, if necessary.
+  ]
+}

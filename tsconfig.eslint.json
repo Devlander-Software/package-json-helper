@@ -2,10 +2,15 @@
     "extends": "./tsconfig.json",
     "include": [
       "src/**/*",
-      "jest.config.js",
+      "jest.config.ts",
       "build-script.config.js",
       "rollup.config.js",
-      "test/**/*"
+      "test/**/*",
+
+      "./__tests__/**/*.ts",
+      "./__tests__/**/*.test.ts",
+      "./bootstrap.cjs",
+
     ],
     "exclude": [
         "node_modules",

@@ -28,18 +28,27 @@
   <img alt="Landon Johnson On Twitter" src="https://img.shields.io/twitter/follow/landonwjohnson.svg?style=social&label=Follow" />
 </a> 
 
-<a href="https://bit.ly/landon-wakatime-link" >
-<img src="https://wakatime.com/badge/user/bd50b6c5-e0ca-4937-83b3-ab2d13adbc73/project/018b4458-1d71-4cca-84f7-1a6db871b168.svg" />
-<a/>
+
+
+<a href="https://bit.ly/landonwjohnson-on-twitter" target="_parent">
+  <img alt="Wakatime stats for utils" src="https://wakatime.com/badge/user/bd50b6c5-e0ca-4937-83b3-ab2d13adbc73/project/018bf414-eac6-416d-ad31-229b5e62bad3.svg" />
+</a> 
+
 
 
 # Package.json Type Helper
 
 ## Introduction
 
-This utility package is designed to streamline the development process of design systems within the context of Storybook and React. It addresses a common issue where having a **`type`** property defined in your **`package.json`** can disrupt the development and deployment flow.
-When developing design systems with **Storybook and React**, you may encounter scenarios where you want to test components or features within Storybook itself. Additionally, you might need to publish your design system as an npm module using tools like Rollup and **`npm publish`**. However, if your `package.json` includes a `type` property, it can lead to problems when rendering components within Storybook.
-It is intended to be used within npm scripts, or github actions. 
+This utility package is expertly engineered to optimize and facilitate the development workflow of design systems, making it a perfect fit for projects leveraging Storybook and React. By addressing the specific challenge associated with the **`type`** property in the **`package.json`** file, this tool ensures a frictionless development and deployment cycle, making it an essential asset for developers and teams aiming to enhance their design system efficiency.
+
+Ideal for developers and teams working on design systems in **Storybook and React**, this package is a game-changer. It simplifies the process of component testing and feature evaluation directly within Storybook. Furthermore, it is indispensable for those looking to release their design system as an npm module, facilitating the use of Rollup and **`npm publish`** without the usual complications caused by the `type` property in `package.json`. This solution effectively eliminates the common obstacles faced when rendering components in Storybook, streamlining your project's workflow.
+
+The package is designed with versatility in mind, seamlessly integrating into npm scripts or GitHub Actions. It introduces innovative functions for effortlessly swapping types or main entry files between development and production settings, thus catering to the dynamic needs of modern development practices.
+
+Additionally, it offers a solution to the limitations faced by developers using Expo, which traditionally does not allow for the customization of paths for "expo-router/entry" or "node_modules/expo/AppEntry.js". This feature is particularly beneficial for projects aiming for a streamlined bundling and deployment process. Our utility package eradicates the need for manual adjustments or scripting for deployments, advocating for a process that is automated, error-free, and efficient.
+
+Crafted for developers and teams dedicated to minimizing bugs and maximizing productivity through automated testing and deployment processes, this utility package is a must-have for enhancing your design system development workflow in Storybook and React environments. Embrace the future of design system development with our cutting-edge solution, designed to keep your projects on the leading edge of technology and efficiency.
 
 ## This package simplifies the process by providing a command-line utility that allows you to manage the `type` property in your `package.json` file based on specific conditions. It enables you to:
 
@@ -136,5 +145,5 @@ This package is open-source and released under the MIT License. See the LICENSE 
 
 ## To Do
 - [x] Create jest tests for update-package-json-type.ts
+- [x] Swap main entry files 
 - [ ] Finalize cli tests
-- [ ] Swap main entry files 
