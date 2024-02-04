@@ -1,6 +1,6 @@
 {
   "name": "@devlander/package-json-helper",
-  "version": "1.0.60",
+  "version": "1.0.61",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "typings/index.d.ts",
