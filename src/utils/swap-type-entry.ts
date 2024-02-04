@@ -67,8 +67,8 @@ export const swapTypeEntry = (
     )
 
     return parsedPackage
-  } catch (error: any) {
-    logColoredMessage(`Failed to swap type entry: ${error.message}`, 'red')
+  } catch (error) {
+    logColoredMessage(`Failed to swap type entry: ${error.message as Error}`, 'red')
     return 'Failed to swap type entry'
   }
 }

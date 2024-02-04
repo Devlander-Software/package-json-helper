@@ -33,13 +33,13 @@ describe('swapTypeEntry', () => {
   const pathForExamplePackageJson = `${currentCommand}/example/package.json`
 
   it('should update type entry to "commonjs" when typeToSwap is "commonjs"', () => {
-    return new Promise<void>((done) => {
+    return new Promise<void>((resolve) => {
       swapTypeEntry('commonjs', pathForExamplePackageJson)
 
       setTimeout(() => {
         const updatedPackageJson = refetchJson(pathForExamplePackageJson)
         expect(updatedPackageJson.type).toBe('commonjs')
-        return done()
+        resolve()
       }, 1000)
     })
   }, 1500)
@@ -52,7 +52,7 @@ describe('swapTypeEntry', () => {
         const updatedPackageJson = refetchJson(pathForExamplePackageJson)
         expect(updatedPackageJson.type).toBeUndefined()
         done()
-      }, 500)
+      }, 1000)
     })
   })
 })
