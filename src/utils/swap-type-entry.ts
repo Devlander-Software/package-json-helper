@@ -49,7 +49,7 @@ export const swapTypeEntry = (
         parsedPackage.type = typeToSwap
       } else if (parsedPackage.type === typeToSwap) {
         console.log('Type is already set to the specified value')
-        return
+        return parsedPackage
       } else if (!parsedPackage.type) {
         parsedPackage = {
           ...parsedPackage,

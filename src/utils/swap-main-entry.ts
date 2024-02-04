@@ -8,8 +8,9 @@ import { logColoredMessage } from './log-with-color'
  * @param {string} newMainValue The new value for the main field.
  */
 export const swapMainEntry = (
+  newMainValue: string,
   packageJsonPath: string,
-  newMainValue: string
+
 ) => {
   try {
     // Load package.json
