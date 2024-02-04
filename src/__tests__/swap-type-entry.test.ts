@@ -32,25 +32,27 @@ describe('swapTypeEntry', () => {
   }
   const pathForExamplePackageJson = `${currentCommand}/example/package.json`
 
-  const logSpy = jest.fn() // Add this line to declare the missing variable
+  it('should update type entry to "commonjs" when typeToSwap is "commonjs"', () => {
+    return new Promise<void>((resolve) => {
+      swapTypeEntry('commonjs', pathForExamplePackageJson)
 
-  it('should update type entry to "commonjs" when typeToSwap is "commonjs"', (done) => {
-    swapTypeEntry('commonjs', pathForExamplePackageJson)
-
-    setTimeout(() => {
-      const updatedPackageJson = refetchJson(pathForExamplePackageJson)
-      expect(updatedPackageJson.type).toBe('commonjs')
-      done()
-    }, 1000)
+      setTimeout(() => {
+        const updatedPackageJson = refetchJson(pathForExamplePackageJson)
+        expect(updatedPackageJson.type).toBe('commonjs')
+        resolve()
+      }, 1000)
+    })
   }, 1500)
 
-  it('should remove type entry when typeToSwap is "none"', (done) => {
-    swapTypeEntry('none', pathForExamplePackageJson)
+  it('should remove type entry when typeToSwap is "none"', () => {
+    return new Promise<void>((done) => {
+      swapTypeEntry('none', pathForExamplePackageJson)
 
-    setTimeout(() => {
-      const updatedPackageJson = refetchJson(pathForExamplePackageJson)
-      expect(updatedPackageJson.type).toBeUndefined()
-      done()
-    }, 1000)
+      setTimeout(() => {
+        const updatedPackageJson = refetchJson(pathForExamplePackageJson)
+        expect(updatedPackageJson.type).toBeUndefined()
+        done()
+      }, 1000)
+    })
   })
 })
